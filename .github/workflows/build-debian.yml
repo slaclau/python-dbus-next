@@ -13,5 +13,24 @@ jobs:
         run: |
           sudo apt install devscripts equivs
           sudo mk-build-deps -i -t "apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends -y"
+      - name: Import key
+        run: |
+          GPG_KEY_ID=$(echo "${{ secrets.PPA_GPG_PRIVATE_KEY }}" | gpg --import-options show-only --import | sed -n '2s/^\s*//p')
+          echo $GPG_KEY_ID
+          echo "${{ secrets.PPA_GPG_PRIVATE_KEY }}" | gpg --batch --import
       - name: Build
-        run: dpkg-buildpackage 
+        run: dpkg-buildpackage
+      - name: Upload debian package
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.os }}
+          path: |
+            ../fortius-ant*.deb
+            ../fortius-ant*.dsc
+            ../fortius-ant*.tar.xz
+            ../fortius-ant*.changes
+      - name: Publish package to prerelease PPA
+        run: |
+          sudo apt install dput
+          dput ppa:slaclau/ppa-pre ../fortius-ant*source.changes
+        if: github.ref == 'refs/heads/master' 
