@@ -3,6 +3,7 @@ Section: python
 Priority: optional
 Maintainer: Sebastien Laclau <seb.laclau@gmail.com>
 Build-Depends: python3-all, dh-python, debhelper-compat (= 13),
+ python3-pytest
 
 Package: python3-dbus-next
 Architecture: any
