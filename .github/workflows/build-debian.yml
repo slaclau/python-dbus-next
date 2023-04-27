@@ -21,16 +21,16 @@ jobs:
       - name: Build
         run: |
           dpkg-buildpackage
-          mv ../fortius-ant_*.* .
+          mv ../python-dbus-next_*.* .
       - name: Upload debian package
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.os }}
+          name: Debian
           path: |
-            fortius-ant*.deb
-            fortius-ant*.dsc
-            fortius-ant*.tar.xz
-            fortius-ant*.changes
+            python-dbus-next*.deb
+            python-dbus-next*.dsc
+            python-dbus-next*.tar.xz
+            python-dbus-next*.changes
       - name: Publish package to prerelease PPA
         run: |
           sudo apt install dput
