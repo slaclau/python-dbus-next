@@ -1,4 +1,4 @@
-python-dbus-next (0.2.3-2) jammy; urgency=medium
+python-dbus-next (0.2.3-2) replaceme; urgency=medium
 
   * Update build depends to python3-all.
 
