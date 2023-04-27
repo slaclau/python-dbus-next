@@ -5,7 +5,7 @@ Maintainer: Sebastien Laclau <seb.laclau@gmail.com>
 Build-Depends:
  dh-python,
  debhelper-compat (= 13),
- python3,
+ python3-all,
  python3-setuptools
 
 Package: python3-dbus-next

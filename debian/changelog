@@ -1,3 +1,9 @@
+python-dbus-next (0.2.3-2) jammy; urgency=medium
+
+  * Update build depends to python3-all.
+
+ -- Sebastien Laclau <seb.laclau@gmail.com>  Thu, 27 Apr 2023 16:03:00 +0100
+
 python-dbus-next (0.2.3-1) jammy; urgency=medium
 
   * Update build depends.
