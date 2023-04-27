@@ -1,4 +1,4 @@
-python-dbus-next (0.2.3-0) unstable; urgency=medium
+python-dbus-next (0.2.3-0) jammy; urgency=medium
 
   * Initial release.
 

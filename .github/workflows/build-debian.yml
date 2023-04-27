@@ -34,5 +34,5 @@ jobs:
       - name: Publish package to prerelease PPA
         run: |
           sudo apt install dput
-          dput ppa:slaclau/ppa-pre fortius-ant*source.changes
+          dput ppa:slaclau/ppa-pre python-dbus-next*source.changes
         if: github.ref == 'refs/heads/master' 
