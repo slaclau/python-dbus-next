@@ -28,7 +28,10 @@ jobs:
           echo "${{ secrets.PPA_GPG_PRIVATE_KEY }}" | gpg --batch --import
       - name: Build
         run: |
-          pbuilder --distribution ${{ matrix.codename }} ../*dsc --buildresult ..
+          pbuilder \
+            --distribution ${{ matrix.codename }} \
+            --buildresult .. \
+            ../*dsc
           mv ../python-dbus-next_*.* .
       - name: Upload debian package
         uses: actions/upload-artifact@v3
