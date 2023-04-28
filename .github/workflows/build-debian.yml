@@ -28,7 +28,7 @@ jobs:
           echo "${{ secrets.PPA_GPG_PRIVATE_KEY }}" | gpg --batch --import
       - name: Build
         run: |
-          pbuilder \
+          pbuilder build \
             --distribution ${{ matrix.codename }} \
             --buildresult .. \
             ../*dsc
