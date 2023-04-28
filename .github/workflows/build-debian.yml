@@ -5,18 +5,21 @@ on:
   
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     
     strategy:
       matrix:
-        os: [ubuntu-22.04, ubuntu-20.04]
+        codename: [focal, jammy, kinetic, lunar]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Get build dependencies
+      - name: Get pbuilder
         run: |
-          sudo apt install devscripts equivs
-          sudo mk-build-deps -i -t "apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends -y"
+          sudo apt install pbuilder
+      - name: Make source
+        run: |
+          python3 updateChangelog.py codename
+          dpkg-buildpackage -S -sa
       - name: Import key
         run: |
           GPG_KEY_ID=$(echo "${{ secrets.PPA_GPG_PRIVATE_KEY }}" | gpg --import-options show-only --import | sed -n '2s/^\s*//p')
@@ -24,9 +27,7 @@ jobs:
           echo "${{ secrets.PPA_GPG_PRIVATE_KEY }}" | gpg --batch --import
       - name: Build
         run: |
-          python3 updateChangelog.py 
-          dpkg-buildpackage -S -sa
-          dpkg-buildpackage -b
+          pbuild --distribution codename ../*dsc --buildresult ..
           mv ../python-dbus-next_*.* .
       - name: Upload debian package
         uses: actions/upload-artifact@v3
