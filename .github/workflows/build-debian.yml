@@ -26,6 +26,7 @@ jobs:
           GPG_KEY_ID=$(echo "${{ secrets.PPA_GPG_PRIVATE_KEY }}" | gpg --import-options show-only --import | sed -n '2s/^\s*//p')
           echo $GPG_KEY_ID
           echo "${{ secrets.PPA_GPG_PRIVATE_KEY }}" | gpg --batch --import
+          debsign ../*.changes
       - name: Build
         run: |
           sudo pbuilder create \
@@ -34,7 +35,6 @@ jobs:
             --distribution ${{ matrix.codename }} \
             --buildresult .. \
             ../*dsc
-          debsign ../*.changes
           mv ../python*.* .
       - name: Upload debian package
         uses: actions/upload-artifact@v3
