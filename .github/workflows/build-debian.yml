@@ -13,9 +13,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Get pbuilder
+      - name: Get build dependencies
         run: |
           sudo apt install pbuilder
+          sudo mk-build-deps -i -t "apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends -y"
       - name: Make source
         run: |
           python3 updateChangelog.py codename
