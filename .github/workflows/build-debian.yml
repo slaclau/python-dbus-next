@@ -28,6 +28,8 @@ jobs:
           echo "${{ secrets.PPA_GPG_PRIVATE_KEY }}" | gpg --batch --import
       - name: Build
         run: |
+          sudo pbuilder create \
+            --distribution ${{ matrix.codename }}
           sudo pbuilder build \
             --distribution ${{ matrix.codename }} \
             --buildresult .. \
