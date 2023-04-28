@@ -2,8 +2,8 @@ import distro
 import fileinput
 import sys
 
-if len(sys.argv) > 0:
-    codename = sys.argv[0]
+if len(sys.argv) > 1:
+    codename = sys.argv[1]
 else:
     codename = distro.codename()
 
