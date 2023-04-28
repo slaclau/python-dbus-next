@@ -34,7 +34,7 @@ jobs:
             --distribution ${{ matrix.codename }} \
             --buildresult .. \
             ../*dsc
-          mv ../python* .
+          mv ../python*.* .
       - name: Upload debian package
         uses: actions/upload-artifact@v3
         with:
