@@ -34,18 +34,15 @@ jobs:
             --distribution ${{ matrix.codename }} \
             --buildresult .. \
             ../*dsc
-          mv ../python-dbus-next_*.* .
+          mv ../python* .
       - name: Upload debian package
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.os }}
+          name: ${{ matrix.codename }}
           path: |
-            python-dbus-next*.deb
-            python-dbus-next*.dsc
-            python-dbus-next*.tar.xz
-            python-dbus-next*.changes
+            python*
       - name: Publish package to prerelease PPA
         run: |
           sudo apt install dput
-          dput ppa:slaclau/ppa-pre python-dbus-next*source.changes
+          dput ppa:slaclau/ppa-pre *source.changes
         if: github.ref == 'refs/heads/master' 
