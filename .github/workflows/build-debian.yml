@@ -49,5 +49,5 @@ jobs:
       - name: Publish package to prerelease PPA
         run: |
           sudo apt install dput
-          dput ppa:slaclau/ppa-pre source/source.changes
+          dput ppa:slaclau/ppa-pre source/*source.changes
         if: github.ref == 'refs/heads/master' 
